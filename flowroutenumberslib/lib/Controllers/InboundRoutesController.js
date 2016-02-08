@@ -86,26 +86,37 @@ var InboundRoutesController = {
         //prepare query string for API call;
         var baseUri = configuration.BASEURI;
         
-        var queryBuilder = baseUri + "/routes/{route_name}/";
+        var queryBuilder = baseUri + "/routes/{route_name}";
         
         //Process template parameters
         queryBuilder = APIHelper.appendUrlWithTemplateParameters(queryBuilder, {
             "route_name" : routeName
         });
 
-        //Process query parameters
-        queryBuilder = APIHelper.appendUrlWithQueryParameters(queryBuilder, {
-            "type" : type,
-            "value" : value
-        });
-
         //validate and preprocess url
         var queryUrl = APIHelper.cleanUrl(queryBuilder);
         
+        //prepare headers
+        var headers = {
+            "accept" : "application/json",
+            "content-type" : "application/json; charset=utf-8"
+        };
+
+        //encapsulate params in to a single body object
+        var bodyParams = {
+            "type" : type,
+            "value" : value
+        };
+
+        //Remove null values
+        APIHelper.cleanObject(bodyParams);
+
         //Construct the request
         var options = {
             queryUrl: queryUrl,
             method: "PUT",
+            headers: headers,
+            body : APIHelper.jsonSerialize(bodyParams),
         };
         //append custom auth authorization
         CustomAuthUtility.appendCustomAuthParams(options);

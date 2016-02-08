@@ -5,6 +5,7 @@
   */
 
 var configuration = require('./configuration');
+var flowrouteUtils  = require('./flowrouteUtils');
 
 var CustomAuthUtility = {
 
@@ -20,7 +21,7 @@ var CustomAuthUtility = {
         // 
         // ie. Add a header through:
         //request.headers["key"] = "value"
-
+        flowrouteUtils.appendCustomAuth(request);
     }
 };
 

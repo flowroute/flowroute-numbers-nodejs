@@ -16,17 +16,17 @@ var TelephoneNumbersController = {
      * @param {string} telephoneNumber    Required parameter: This is the TN for which you would like to retrieve configuration details for
      * @param {function} callback    Required parameter: Callback function in the form of function(error, response)
      *
-     * @return {mixed}
+     * @return {string}
      */
     telephoneNumberDetails : function(telephoneNumber, callback){
 
         //prepare query string for API call;
         var baseUri = configuration.BASEURI;
         
-        var queryBuilder = baseUri + "/tns/";
+        var queryBuilder = baseUri + "/tns/{telephone_number}";
         
-        //Process query parameters
-        queryBuilder = APIHelper.appendUrlWithQueryParameters(queryBuilder, {
+        //Process template parameters
+        queryBuilder = APIHelper.appendUrlWithTemplateParameters(queryBuilder, {
             "telephone_number" : telephoneNumber
         });
 
@@ -37,7 +37,7 @@ var TelephoneNumbersController = {
         var headers = {
             "accept" : "application/json"
         };
-
+        
         //Construct the request
         var options = {
             queryUrl: queryUrl,
@@ -53,7 +53,7 @@ var TelephoneNumbersController = {
             if(error){
                 callback({errorMessage: error.message, errorCode: error.code},null,context);
             }else if (response.statusCode >= 200 && response.statusCode <= 206) {
-                callback(null,JSON.parse(response.body),context);
+                callback(null, response.body,context);
             }else{
                 //Error handling using HTTP status codes
                 if (response.statusCode == 400) {
@@ -76,7 +76,7 @@ var TelephoneNumbersController = {
      * @param {string} number    Required parameter: Telephone number to purchase
      * @param {function} callback    Required parameter: Callback function in the form of function(error, response)
      *
-     * @return {mixed}
+     * @return {string}
      */
     purchase : function(billing, number, callback){
 
@@ -118,7 +118,7 @@ var TelephoneNumbersController = {
             if(error){
                 callback({errorMessage: error.message, errorCode: error.code},null,context);
             }else if (response.statusCode >= 200 && response.statusCode <= 206) {
-                callback(null,JSON.parse(response.body),context);
+                callback(null, response.body,context);
             }else{
                 //Error handling using HTTP status codes
                 if (response.statusCode == 400) {
@@ -201,10 +201,10 @@ var TelephoneNumbersController = {
     /**
      * Updates the routing information for a telephone number on your account, as indicated by the specified URI. The body of the request requires two routes listed in order of preference (primary first and fail over second).
      * @param {string} number    Required parameter: The telephone number who's routing you wish to update
-     * @param {array} routes    Required parameter: JSON string containg the The routes obtained from the routes resource that you would like to point your telephone number to.
+     * @param {array} routes    Required parameter: JSON string containing the The routes obtained from the routes resource that you would like to point your telephone number to.
      * @param {function} callback    Required parameter: Callback function in the form of function(error, response)
      *
-     * @return {mixed}
+     * @return {string}
      */
     update : function(number, routes, callback){
 
@@ -246,7 +246,7 @@ var TelephoneNumbersController = {
             if(error){
                 callback({errorMessage: error.message, errorCode: error.code},null,context);
             }else if (response.statusCode >= 200 && response.statusCode <= 206) {
-                callback(null,JSON.parse(response.body),context);
+                callback(null, response.body,context);
             }else{
                 //Error handling using HTTP status codes
                 if (response.statusCode == 400) {
