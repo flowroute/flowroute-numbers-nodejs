@@ -29,7 +29,7 @@ The following shows how to import the SDK and setup a basic callback function fo
         
 > Depending on where in your file system lowroutebumberslib is, you may need to specify the full file path to flowroutebnumberslib.   
    
-2) Configure your API Username and Password from [Flowroute Manager](https://manage.flowroute.com/accounts/preferences/beta/).
+2) Configure your API Username and Password from [Flowroute Manager](https://manage.flowroute.com/accounts/preferences/api/).
  > If you do not have an API Key contact support@flowroute.com:
 
         flowroute.configuration.username = "AccessKey";
@@ -147,16 +147,20 @@ The update method is used to update both the primary and failover route for a ph
 
 ##### Example Usage
 
-	var routes = [{"name": "c8dee26b0ce87fdf678899df52cc302g"}, {"name": "sip-reg"}];
-	flowroute.TelephoneNumbersController.update(12064205780,routes,cb);
+	$rtes = '{"routes": [{"name": "ea4f4056663e27b082999689982e4771"}, {"name": "5ec40d37d10ae11fe5690c0b00f6a903"}]}'; 
+	$response = $tnc->update('12064205780',$rtes);
+	print_r($response);
+
+>The names of all of the routes on your account can be obtained using the list function in the InboundRoutesController.
+
 
 ### InboundRoutesController
 
 The Inbound Routes Controller contains the methods required to view all of your existing inbound routes and to create new inbound routes.
 
-#### list : function(limit, page, callback)
+#### mlist ($limit = NULL,$page = NULL)
 
-The list method is used to return all of the existing inbound routes from your Flowroute account.
+The mlist method is used to return all of the existing inbound routes from your Flowroute account.
 
 | Parameter | Required | Usage                                            |
 |-----------|----------|--------------------------------------------------|
@@ -165,9 +169,10 @@ The list method is used to return all of the existing inbound routes from your F
 
 ##### Example Usage
 
-	flowroute.InboundRoutesController.list(10,1,cb);
+	$response = $irc->mlist(10,null);
+	print_r($response);
 	
-#### createNewRoute : function(routeName, type, value, callback)
+#### createNewRoute ($routeName,$type,$value) 
 
 The createNewRoute method is used to create a new inbound route.
 
@@ -179,15 +184,11 @@ The createNewRoute method is used to create a new inbound route.
 
 ##### Example Usage
 
-	flowroute.InboundRoutesController.createNewRoute('PSTNroute1','PSTN','18002364455',cb)
-	flowroute.InboundRoutesController.createNewRoute('Hostroute1','HOST','24.239.23.40:5060	',cb)
-	flowroute.InboundRoutesController.createNewRoute('URIroute1','URI','sip:120664480000@215.122.69.152:5060',cb)
+	$response = $irc->createNewRoute('PSTNroute1','PSTN','18002364455');
+	print_r($response);
 	
-
-
-
-
-
-
-    
-
+	$response = $irc->createNewRoute('Hostroute1','HOST','24.239.23.40:5060');
+	print_r($response);
+		
+	$response = $irc->createNewRoute('URIroute1','URI','sip:120664480000@215.122.69.152:5060');
+	print_r($response);
