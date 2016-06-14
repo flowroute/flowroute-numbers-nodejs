@@ -235,7 +235,8 @@ var TelephoneNumbersController = {
             queryUrl: queryUrl,
             method: "PATCH",
             headers: headers,
-            body : '{"routes": ' + APIHelper.jsonSerialize(routes) + '}',
+            body : '{"routes": ' + (routes) + '}',
+            // body : '{"routes": ' + (routes) + '}',
         };
         //append custom auth authorization
         CustomAuthUtility.appendCustomAuthParams(options);
