@@ -1,7 +1,5 @@
 # flowroute-numbers-nodejs
 
-## What is it?
-
 Flowroute-numbers-nodejs is a NodeJS SDK that provides methods for interacting with [Flowroute's](https://www.flowroute.com) v1 API. These methods can be used to accomplish the following:
 
 * Search for purchasable phone numbers
