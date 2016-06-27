@@ -102,7 +102,7 @@ Importing the SDK allows you to instantiate the Controllers, which contain the m
 
 	>**Note:** The callback function name is a user-defined variable that can be any name of your own choosing, but whatever name you choose must be used consistently throughout the file. Throughout this SDK, `cb` is the variable named assigned to this function.
 
-6.	Save the file wit a **.js** extension in. For example, **sendmsg.js**.
+6.	Save the file with a **.js** extension in. For example, **sendmsg.js**.
 
 7.	Add the [Controllers](#controllers) and methods to the file. 
 
