@@ -357,7 +357,7 @@ Parameter | Description                                             |
 ||	*`telephone number`*- The retrieved telephone number object, which is composed of:|
 ||	<ul><ul><li> `initial_cost`- The one-time fixed cost for that telephone number. The default value is USD `1.00`.</li></ul>|
 | | <ul><ul><li>`monthly_cost`- The recurring monthly cost to maintain that telephone number. The default value is USD `1.25`.</ul>|
-| |<ul><ul><li>`billing_methods`- Displays the billing methods available for the telephone number: <ul><li>`[0] VPRI`, or</ul></li> <ul><li>`[1] METERED` </ul></li>|
+| |<ul><ul><li>`billing_methods`- Displays the telephone number's billing method, which will only be `[1] METERED`.|
 ||	<ul><ul><li>`ratecenter`- The ratecenter associated with the NPANXX.|
 ||	<ul><ul><li>`state`- The US state or Canadian province or territory in which the NPANXX is located.</li></ul>|
 
@@ -392,7 +392,7 @@ The Purchasable Phone Numbers Controller contains all of the methods necessary t
 	};
 	
 	//Purchase a Phone Number
-	var billingMethod = {"billing_method":"METERED" or "VPRI"};
+	var billingMethod = {"billing_method":"METERED"};
 	flowroute.TelephoneNumbersController.purchase(billingMethod,number,callback);)
 	
 	//List Account Telephone Numbers
@@ -421,7 +421,7 @@ The purchase method is used to purchase a telephone number from Flowroute's inve
 Add the following lines to the end of your Node.js file:
 	
 	//Purchase a Telephone Number
-	var billingMethod = {"billing_method":"METERED" or "VPRI"};
+	var billingMethod = {"billing_method":"METERED"};
 	flowroute.TelephoneNumbersController.purchase(billingMethod,number,callback);
 
 First, define the variable name used in the method: 
@@ -434,7 +434,7 @@ Next, set the variables that define the `billingMethod`.
 
 | Parameter       | Required | Type| Description                                               |                                                          
 |-----------------|----------|--------|-------------------------------------------------------|
-| `"billing_method":"METERED" or "VPRI"`   | True     |string  | Sets the billing method to apply to the purchased number.  It must be one of the following: <ul><li>`METERED` — unlimited concurrent calls, each billed per-minute used.</li> <li> `VPRI` — limits the number of concurrent calls to the number of VPRI channels you have, but with unlimited usage on each channel. </li></ul>| 
+| `"billing_method":"METERED"` | True     |string  | Sets the billing method to apply to the purchased number.  It can only be`METERED`, which are unlimited concurrent calls, each billed per-minute used.| 
 
 Finally, define the Flowroute number to purchase and set the callback variable.
 
@@ -516,7 +516,7 @@ Parameter | Description                                             |
 |--------|-------------------------------------------------------|
 | `tns`  | Object composed of a `telephone number`, `billing_method`, and `routes`.|                           
 ||	*`telephone number`*- The retrieved telephone number object, which is composed of:|
-||	<ul><ul><li> `billing_method`- The billing method assigned to the phone number when the number was purchased. This will be either `METERED` or `VPRI`.</ul>|
+||	<ul><ul><li> `billing_method`- The billing method assigned to the phone number when the number was purchased. This will only be `METERED`.</ul>|
 | |<ul><ul><li>`routes`- Displays the primary and failover routes for the phone number: <ul><li>`type` — Indicates the type of route: `HOST`, `PSTN`, or `URI`. If no route is assigned, `SIP-REG` is the default name assigned to the route.</ul></li> <ul><li>`name` — Name of the route. If no `name` was given to the route, `sip-reg` is the assigned default name.</ul></li> <ul><li>`value` — Value of the route, set for the `type` when the route was created. </ul></li>**Note:** Routes are created using the [createNewRoute](#createroute) method and existing routes can be viewed using the [mlist](#listroutes) method.|
 
 #####Error response
@@ -574,7 +574,7 @@ The following information is returned in the response:
 
 Parameter | Description                                             |
 |--------|-------------------------------------------------------|                       
-|`billing_method`| The billing method assigned to the phone number when the number was purchased. This will be either `METERED` or `VPRI`.|
+|`billing_method`| The billing method assigned to the phone number when the number was purchased. This will be only be `METERED`.|
 |`routes` |Displays the primary and failover routes for the phone number. The first route group displays information about the primary route, the second about the failover route:<br> <ul><li>`type` — Indicates the type of route: `HOST`, `PSTN`, or `URI`. If no route is assigned, `SIP-REG` is the default name assigned to the route.</li> <li>`name` — Name of the route. If no `name` was given to the route, `sip-reg` is the default name.</ul></li>**Note:** Routes are created using the [createNewRoute](#createroute) method and can be assigned using the `update` method.|
 
 #####Error response
