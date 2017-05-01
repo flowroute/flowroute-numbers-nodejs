@@ -1,5 +1,5 @@
 # Numbers Node.js SDK
-`flowroute-numbers-nodejs` is a Node.js API Wrapper that provides methods for interacting with [v1] (https://developer.flowroute.com/api/numbers/overview) of the Flowroute API. These methods can be used to accomplish the following:
+`flowroute-numbers-nodejs` is a Node.js API Wrapper that provides methods for interacting with [v1](https://developer.flowroute.com/api/numbers/overview) of the Flowroute API. These methods can be used to accomplish the following:
 
 * Search for purchasable phone numbers
 * Purchase phone numbers
